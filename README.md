@@ -60,7 +60,7 @@ pip install -r requirements.txt
 3) Finally run the following command in the terminal:
 
 ```bash
-uvicorn main:app --reload
+cd src/ && uvicorn main:app --reload
 ```
 
 ## Modules 🚨
