@@ -56,8 +56,13 @@ deactivate
 ```bash
 pip install -r requirements.txt
 ```
+3) After that, you have to create a .env file with the following fields:
+```json
+WEATHER_API_KEY=[api key value]
+WEATHER_API_URL=http://api.openweathermap.org/data/2.5/weather
+```
 
-3) Finally run the following command in the terminal:
+4) Finally run the following command in the terminal:
 
 ```bash
 cd src/ && uvicorn main:app --reload
