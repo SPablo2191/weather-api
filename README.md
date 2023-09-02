@@ -54,7 +54,7 @@ deactivate
 2) Then run the following command to obtain the packages used in the API:
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements>dev.txt
 ```
 3) After that, you have to create a .env file with the following fields:
 ```json
@@ -65,7 +65,7 @@ WEATHER_API_URL=http://api.openweathermap.org/data/2.5/weather
 4) Finally run the following command in the terminal:
 
 ```bash
-cd src/ && uvicorn main:app --reload
+python src/main.py
 ```
 
 ## Modules 🚨
