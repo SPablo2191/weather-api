@@ -40,7 +40,10 @@ async def get_weather(city: str, country: str):
             )
             if response.status_code != 200:
                 return JSONResponse(
-                    content={"message": "ERROR: Weather data not found"},
+                    content={
+                        "message": "ERROR: Weather data not found",
+                        "description": response.json(),
+                    },
                     status_code=ErrorCode.not_found,
                 )
             data.location_name = (
