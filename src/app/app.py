@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from app.routes.weather import router as WeatherRouter
-from app.utils import EndpointName
+from app.utils import EndpointName,weather_api_url
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -11,6 +11,7 @@ origins = [
     "http://localhost",
     "http://localhost:8080",
     "https://weather-api-vgb9.onrender.com",
+    weather_api_url
 ]
 app.add_middleware(
     CORSMiddleware,
