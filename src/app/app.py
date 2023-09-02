@@ -8,5 +8,5 @@ app.include_router(WeatherRouter, tags=["Weather"], prefix=EndpointName.weather)
 
 
 @app.get("/", tags=["Root"])
-async def read_root():
+async def index():
     return {"message": "Welcome to the weather API!⛈️"}
