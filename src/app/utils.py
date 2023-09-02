@@ -12,8 +12,8 @@ weather_api_url = os.getenv("WEATHER_API_URL")
 class EndpointName(str, Enum):
     weather = "/api/weather"
 
-class ErrorCode(str, Enum):
-    correct_request = 200
+class ErrorCode(int, Enum):
+    ok_request = 200
     bad_request = 400
     not_found = 404
     internal_server_error = 500

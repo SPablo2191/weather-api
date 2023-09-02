@@ -14,6 +14,14 @@ import requests
 router = APIRouter()
 
 
+def data_temperature(value: float) -> dict:
+    fahrenheit_temp = kelvin_to_fahrenheit(value)
+    celsius_temp = kelvin_to_celsius(value)
+    return {
+        "fahrenheit": fahrenheit_temp,
+        "celsius": celsius_temp,
+    }
+
 @router.get("/", response_description="Weather data retrieved")
 async def get_weather(city: str, country: str):
     if len(country) != 2:
@@ -67,15 +75,9 @@ async def get_weather(city: str, country: str):
             },
             status_code=ErrorCode.internal_server_error,
         )
-    weather_response = JSONResponse(content=data.dict(), status_code=ErrorCode.correct_request)
+    weather_response = JSONResponse(content=data.dict(), status_code=ErrorCode.ok_request)
     weather_response.headers["Content-Type"] = "application/json"
     return weather_response
 
 
-def data_temperature(value: float) -> dict:
-    fahrenheit_temp = kelvin_to_fahrenheit(value)
-    celsius_temp = kelvin_to_celsius(value)
-    return {
-        "fahrenheit": fahrenheit_temp,
-        "celsius": celsius_temp,
-    }
+
