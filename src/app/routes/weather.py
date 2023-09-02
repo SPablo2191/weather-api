@@ -9,5 +9,14 @@ router = APIRouter()
 
 @router.get("/", response_description="Weather data retrieved")
 async def get_weather(city: str, country: str):
-    response = requests.get(f'{weather_api_url}?q={city},{country}&appid={weather_api_key}')
+    if(len(country) != 2):
+        return {"message": "ERROR: Country code must be 2 characters long"}
+    city = city.lower()
+    country = country.lower()
+    try:
+        response = requests.get(f'{weather_api_url}?q={city},{country}&appid={weather_api_key}')
+        
+    except requests.exceptions.RequestException as e:
+        return {"message": "ERROR: Could not connect to weather API",
+                "description": e}
     return response.json()
