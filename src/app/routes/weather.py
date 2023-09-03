@@ -8,6 +8,7 @@ from app.utils import (
     kelvin_to_fahrenheit,
     get_date,
     ErrorCode,
+    cache
 )
 import httpx
 
@@ -32,6 +33,10 @@ async def get_weather(city: str, country: str):
         )
     city = city.lower()
     country = country.lower()
+    cache_key = f"{city.lower()}-{country.lower()}"
+    cached_data = cache.get(cache_key)
+    if cached_data:
+        return JSONResponse(content=cached_data, status_code=ErrorCode.ok_request)
     data: WeatherSchema = WeatherSchema()
     async with httpx.AsyncClient() as client:
         try:
@@ -75,6 +80,7 @@ async def get_weather(city: str, country: str):
                 timezone_offset_seconds=response.json()["timezone"],
                 date_format="%H:%M",
             )
+            cache[cache_key] = data.dict()
         except httpx.RequestError as e:
             return JSONResponse(
                 content={

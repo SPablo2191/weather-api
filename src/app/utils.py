@@ -2,8 +2,11 @@ from dotenv import load_dotenv
 from enum import Enum
 import os
 import datetime
+from cachetools import TTLCache
+
 
 load_dotenv()
+cache = TTLCache(maxsize=100, ttl=120)
 
 weather_api_key = os.getenv("WEATHER_API_KEY")
 weather_api_url = os.getenv("WEATHER_API_URL")
