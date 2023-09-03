@@ -26,7 +26,6 @@ Welcome to the weather API powered by [Open Weather](https://openweathermap.org/
 ![Windows](https://img.shields.io/badge/Windows-compatible-green)
 
 ## Configuration 🤖
-## Installation 🤖
 To use the project locally, you need to follow these steps:
 
 1) Enter the following commands in the console:
@@ -69,3 +68,10 @@ python src/main.py
 ```
 
 ## Modules 🚨
+- [weather](#Weather)
+
+
+## Weather
+| Método | Path | arguments | Description |
+| ------ | -------- |------ | ----------- |
+| GET    | /api/weather/ |country (xx) and city |Get weather data of a city  |
