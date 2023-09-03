@@ -35,11 +35,9 @@ async def get_weather(city: str, country: str):
     data: WeatherSchema = WeatherSchema()
     async with httpx.AsyncClient() as client:
         try:
-            print(weather_api_key)
             response = await client.get(
                 f"{weather_api_url}?q={city},{country}&appid={weather_api_key}"
             )
-            print(response)
             if response.status_code != 200:
                 return JSONResponse(
                     content={
