@@ -8,7 +8,7 @@ from app.utils import (
     kelvin_to_fahrenheit,
     get_date,
     ErrorCode,
-    cache
+    cache,
 )
 import httpx
 
