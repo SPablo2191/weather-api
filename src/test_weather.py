@@ -2,24 +2,25 @@ import pytest
 from fastapi.testclient import TestClient
 from app.app import app
 from app.utils import cache  
-
+from pytest_mock import mocker 
 
 city = "Bogota"
 country = "CO"
+fake_city = "Fake City"
 
 @pytest.fixture
 def client():
     return TestClient(app)
 
-def test_get_weather_with_cache(client, mocker):
-    mocker.patch.object(cache, "get", return_value=None)
-    mocker.patch.object(cache, "set", return_value=None)
-
-    response = client.get(f"/weather?city={city}&country={country}")
-
+def test_get_weather(client, mocker):
+    response = client.get(f"/api/weather?city={city}&country={country}")
     assert response.status_code == 200
     assert "location_name" in response.json()
     assert "temperature" in response.json()
+
+def test_fake_city(client, mocker):
+    response = client.get(f"/api/weather?city={fake_city}&country={country}")
+    assert response.status_code == 404
 
 
 def test_get_weather_with_cached_data(client, mocker):
@@ -29,7 +30,7 @@ def test_get_weather_with_cached_data(client, mocker):
     }
     mocker.patch.object(cache, "get", return_value=cached_data)
 
-    response = client.get(f"/weather?city={city}&country={country}")
+    response = client.get(f"/api/weather?city={city}&country={country}")
 
     assert response.status_code == 200
     assert response.json() == cached_data
